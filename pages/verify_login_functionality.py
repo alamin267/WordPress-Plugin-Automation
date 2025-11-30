@@ -1,3 +1,4 @@
+import pytest
 from playwright.sync_api import Page
 
 class VerifyLoginFunctionality:
@@ -7,8 +8,12 @@ class VerifyLoginFunctionality:
         self.password_input = page.locator("#user_pass")
         self.login_button = page.locator("#wp-submit")
 
-    def navigate(self, base_url):
+    def navigate(self, base_url: str):
         self.page.goto(f"{base_url}/wp-login.php")
+        if not base_url:  # catches None or empty
+            pytest.fail("❌ WP_URL was not provided! Set it in .env and do not commit credentials.")
+              
+        self.page.goto(f"{base_url.rstrip('/')}/wp-login.php", wait_until="load")
 
     def login(self, username, password):
         self.username_input.fill(username)
