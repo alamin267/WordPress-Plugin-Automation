@@ -1,4 +1,4 @@
-name: Python Playwright CI
+name: WordPress Plugin Automation CI
 
 on:
   push:
@@ -15,21 +15,25 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Python 3.10
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
           python-version: "3.10"
 
-      - name: Install dependencies
+      - name: Install system dependencies
         run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+
+      - name: Install Python dependencies
+        run: |
+          pip install --upgrade pip
           pip install pytest playwright python-dotenv
-          
-      - name: Install browsers
-        run: playwright install chromium
+          playwright install chromium
 
       - name: Run tests
         env:
-          BASE_URL: ${{ secrets.WP_URL }}
+          CI: "true"
+          WP_URL: ${{ vars.WP_URL || secrets.WP_URL || '' }}  # injected from repo variables or secrets
           WP_USERNAME: ${{ secrets.WP_USERNAME }}
           WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
-
         run: xvfb-run pytest -v
