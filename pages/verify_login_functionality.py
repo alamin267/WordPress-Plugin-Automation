@@ -10,10 +10,7 @@ class VerifyLoginFunctionality:
 
     def navigate(self, base_url: str):
         self.page.goto(f"{base_url}/wp-login.php")
-        if not base_url:  # catches None or empty
-            pytest.fail("❌ WP_URL was not provided! Set it in .env and do not commit credentials.")
-              
-        self.page.goto(f"{base_url.rstrip('/')}/wp-login.php", wait_until="load")
+        print("Base URL is:", base_url)
 
     def login(self, username, password):
         self.username_input.fill(username)

@@ -32,7 +32,7 @@ jobs:
       - name: Run tests in headed local or headless CI
         env:
           CI: "true"
-          WP_URL: "http://mylocalwordpress.local"   # ✅ match test var, safe because it's local/test url
+          WP_URL: "http://mylocalwordpress.local/wp-login.php?"   # ✅ match test var, safe because it's local/test url
           WP_USERNAME: ${{ secrets.WP_USERNAME }}   # ✅ real value stays in secret, not in repo
           WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
         run: xvfb-run pytest -v

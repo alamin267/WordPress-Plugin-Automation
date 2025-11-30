@@ -9,9 +9,9 @@ from pages.navigate_to_flexiable_dashboard import NavigateToFlexiableDashboard
 load_dotenv()
 
 def test_wordpress_login(page):
-    base_url = os.getenv("WP_URL", "")
-    username = os.getenv("WP_USERNAME", "")
-    password = os.getenv("WP_PASSWORD", "")
+    base_url = os.getenv("WP_URL")
+    username = os.getenv("WP_USERNAME")
+    password = os.getenv("WP_PASSWORD")
 
     login_page = VerifyLoginFunctionality(page)
     plugin_page = VerifyPluginStatusPage(page)
