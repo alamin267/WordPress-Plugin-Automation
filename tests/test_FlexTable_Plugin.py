@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 
+from pages.create_new_table import CreateNewTable
 from pages.verify_login_functionality import VerifyLoginFunctionality
 from pages.verify_plugin_status import VerifyPluginStatusPage
 from pages.navigate_to_flexiable_dashboard import NavigateToFlexiableDashboard
@@ -16,6 +17,7 @@ def test_wordpress_login(page):
     login_page = VerifyLoginFunctionality(page)
     plugin_page = VerifyPluginStatusPage(page)
     flextable_page = NavigateToFlexiableDashboard(page)
+    create_table_page = CreateNewTable(page)
 
     # Test Case 1
     login_page.navigate(base_url)
@@ -28,5 +30,10 @@ def test_wordpress_login(page):
 
     # Test Case 3
     flextable_page.navigate_to_Flextable_Dashboard()
+
+    
+    # Test Case 4
+    create_table_page.Create_Table_Using_Google_sheet("WPPOOL","Table Description")
+    create_table_page.Verify_Table_Title("WPPOOL")
 
  

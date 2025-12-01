@@ -17,4 +17,4 @@ class VerifyLoginFunctionality:
         self.password_input.fill(password)
         self.login_button.click()
         self.page.wait_for_load_state("networkidle")
-        print("\n Login Successful")
+        print("\nLogin Successful")
