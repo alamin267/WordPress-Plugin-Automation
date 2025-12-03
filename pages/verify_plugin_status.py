@@ -1,3 +1,4 @@
+import time
 from playwright.sync_api import Page
 
 class VerifyPluginStatusPage:
@@ -36,21 +37,25 @@ class VerifyPluginStatusPage:
             print("No plugins are available, we have to installing plugin now")
             self.add_plugin_button.click()
             self.search_plugins_input_field.fill("FlexTable")
+            time.sleep(2)
             self.install_now_button.click()
             self.page.wait_for_load_state("networkidle")
             self.active_plugin_button.click()
             print("Plugin Installed Successfully")
+            time.sleep(2)
             #self.allow_permission_button.click()
         elif self.search_plugin_name.is_visible():
             self.search_plugin.fill("FlexTable")
             if self.deactivate_button.is_visible():
-                print("Plugin is available and active")
+                print("Plug is available and active, Nothing to do")
                 self.page.wait_for_load_state("networkidle")
+                time.sleep(2)
             else:
                 print("Plugin is not Activate, We are activating it now")
                 self.activate_button.click()
                 self.page.wait_for_load_state("networkidle")
                 print("Activated Plugin Successfully")
+                time.sleep(2)
             
 
 

@@ -8,6 +8,7 @@ class CreateNewTable:
         # Navigation
         self.flextable_button_from_menu =  page.locator("//div[normalize-space()='FlexTable']")
         self.create_new_table_button = page.locator("//a[normalize-space()='Create new table']")
+        self.create_new_table_button_update = page.locator("//button[normalize-space()='Create new table']")
         self.input_url_field = page.locator("//input[@id='sheet-url']")
         self.create_table_from_url_button = page.locator("//button[normalize-space()='Create table from URL']")
         self.title_field = page.locator("//input[@id='table-name']")
@@ -15,12 +16,17 @@ class CreateNewTable:
         self.save_button = page.locator("//button[normalize-space()='Save changes']")
         self.search_field = page.locator("//input[@placeholder='Search tables']")
         self.no_table_found_text = page.locator("//h5[normalize-space()='No tables found!']")
+        self.first_table_text = page.locator("//p[normalize-space()='Click the button below to create your first table!']")
 
 
     def Create_Table_Using_Google_sheet(self, table_name, description):
         self.flextable_button_from_menu.click()
         self.page.wait_for_load_state("networkidle")
-        self.create_new_table_button.click()
+        if self.first_table_text.is_visible():
+            self.create_new_table_button_update.click()
+        else:
+            self.create_new_table_button.click()
+
         self.input_url_field.fill("https://docs.google.com/spreadsheets/d/11qRH9xUuglOTIZa7JnWTVBYuGMT32ZhFuJ5_xypApGM/edit?gid=0#gid=0")
         self.create_table_from_url_button.click()
         self.title_field.fill(table_name)

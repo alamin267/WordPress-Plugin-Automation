@@ -20,6 +20,7 @@ class CreateNewPage:
         self.publish_button = page.locator("//button[normalize-space()='Publish']")
         self.second_publish_button = page.locator("//button[@class='components-button editor-post-publish-button editor-post-publish-button__button is-primary is-compact']")
         self.view_page_button = page.locator("//a[@class='components-button is-next-40px-default-size is-primary']")
+        self.home_button = page.locator("//a[@role='menuitem'][normalize-space()='MyLocalWordPress']")
 
         # verify table
         self.can_not_load_text = page.locator("//b[contains(text(),'Table maybe deleted or can’t be loaded.')]")
@@ -44,12 +45,14 @@ class CreateNewPage:
         time.sleep(3)
         self.second_publish_button.click()
         self.view_page_button.click()
-        time.sleep(5)
+        time.sleep(3)
         self.page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-        time.sleep(10)
+        time.sleep(2)
     
     def verify_table_value(self):
         if self.can_not_load_text.is_visible():
             print("Table Can not loaded")
         else:
             print("Table loaded")
+        self.home_button.click()
+        time.sleep(3)

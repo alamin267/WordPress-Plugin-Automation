@@ -10,7 +10,6 @@ class VerifyLoginFunctionality:
 
     def navigate(self, base_url: str):
         self.page.goto(f"{base_url}/wp-login.php")
-        print("Base URL is:", base_url)
 
     def login(self, username, password):
         self.username_input.fill(username)
@@ -18,3 +17,4 @@ class VerifyLoginFunctionality:
         self.login_button.click()
         self.page.wait_for_load_state("networkidle")
         print("\nLogin Successful")
+        assert "/wp-admin/" in self.page.url or "Dashboard" in self.page.content()
