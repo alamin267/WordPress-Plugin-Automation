@@ -44,7 +44,7 @@ class CreateNewPage:
         self.publish_button.click()
         time.sleep(3)
         self.second_publish_button.click()
-        self.view_page_button.click()
+        #self.view_page_button.click()
         time.sleep(3)
         self.page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
         time.sleep(2)
@@ -54,5 +54,5 @@ class CreateNewPage:
             print("Table Can not loaded")
         else:
             print("Table loaded")
-        self.home_button.click()
+        #self.home_button.click()
         time.sleep(3)

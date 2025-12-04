@@ -5,6 +5,8 @@ class ShowTableTitleAndDescription:
     def __init__(self, page: Page):
         self.page = page
 
+        self.url = "http://mylocalwordpress.local/wp-admin/admin.php?page=gswpts-dashboard#/"
+
         self.flextable_button_from_menu =  page.locator("//div[normalize-space()='FlexTable']")
         self.edit_button = locator = page.locator("(//a[contains(@class,'table-edit')])[2]")
         self.table_customization = page.locator("//span[normalize-space()='3. Table customization']")
@@ -20,6 +22,7 @@ class ShowTableTitleAndDescription:
 
 
     def show_title_and_description(self):
+        self.page.goto(self.url)
         self.flextable_button_from_menu.click()
         self.edit_button.click()
         time.sleep(1)
