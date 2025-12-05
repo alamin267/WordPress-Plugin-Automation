@@ -26,13 +26,20 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          pip install pytest playwright python-dotenv
+          pip install pytest playwright python-dotenv pytest-html
           playwright install chromium
 
-      - name: Run tests in headed local or headless CI
+      - name: Run tests and generate HTML report
         env:
           CI: "true"
-          WP_URL: ${{ secrets.WP_URL }}   
-          WP_USERNAME: ${{ secrets.WP_USERNAME }}  
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
           WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
-        run: xvfb-run pytest -v
+        run: |
+          xvfb-run pytest -v --html=report.html --self-contained-html
+
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-html-report
+          path: report.html
