@@ -20,7 +20,7 @@ class VerifyPluginStatusPage:
         self.install_now_button = page.locator("a.install-now.button[data-slug='sheets-to-wp-table-live-sync']")
         self.active_plugin_button = page.locator("//a[normalize-space()='Activate']")
         self.allow_permission_button = page.locator("//a[normalize-space()='Allow']")
-        self.find_text = page.locator("(//td[@class='colspanchange'])[1]")
+        self.find_text = page.get_by_text("No plugins found for")
         # Searched Plugin and Activate
         self.search_plugin = page.locator("//input[@id='plugin-search-input']")
         self.activate_button = page.locator("//a[@id='activate-sheets-to-wp-table-live-sync']")
@@ -37,11 +37,11 @@ class VerifyPluginStatusPage:
         self.installed_plugins_submenu.first.click()
         self.page.wait_for_load_state("networkidle")
         self.search_installed_plugin_field.fill("FlexTable")
-        if self.find_text.is_visible():
+        if self.page.get_by_text("No plugins found for:").is_visible():
             print("No plugins are available, we have to installing plugin now")
             self.add_plugin_button.click()
             self.search_plugins_input_field.fill("FlexTable")
-            time.sleep(2)
+            time.sleep(5)
             self.install_now_button.click()
             self.page.wait_for_load_state("networkidle")
             self.active_plugin_button.click()

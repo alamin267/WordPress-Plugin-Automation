@@ -11,14 +11,14 @@ class UserAccountOrderHistory:
         self.url = "http://mylocalwordpress.local/my-account/"
         self.my_account_button = page.locator("//a[normalize-space()='My account']")
         self.orders_button = page.locator("//a[normalize-space()='Orders']")
-        #self.order_no = page.locator("(//li[@class='wc-block-order-confirmation-summary-list-item'])[1]")
+        self.order_no = page.locator("(//li[@class='wc-block-order-confirmation-summary-list-item'])[1]")
         self.order_date = page.locator("text=December 4, 2025").nth(0)
         self.order_links = page.locator('th.woocommerce-orders-table__cell-order-number a')
 
 
     def check_order_history(self):
         self.page.goto(self.url)
-        #self.my_account_button.click()
+        self.my_account_button.click()
         self.page.wait_for_load_state("networkidle")
         self.orders_button.click()
         self.page.evaluate("window.scrollTo(0, 1500)")

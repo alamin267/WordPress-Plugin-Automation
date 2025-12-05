@@ -40,6 +40,7 @@ class EndToEndCheckoutFlow:
         self.page.goto(self.url)
         self.login.click()
         self.username_input.fill(username)
+        time.sleep(1)
         self.password_input.fill(password)
         self.login_button.click()
         self.page.wait_for_load_state("networkidle")
@@ -63,19 +64,13 @@ class EndToEndCheckoutFlow:
         self.input_city.fill("Dhaka,Bangladesh")
         self.input_postcode.fill("1338")
         self.input_phone_number.fill("01977570776")
-        time.sleep(2)
+        time.sleep(3)
         print("Enter Shipping Adress Successfully")
         self.page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
         time.sleep(2)
         self.select_pathao.click()
         time.sleep(1)
-        # try:
-        #     self.place_order.click()
-        #     self.page.wait_for_load_state("networkidle")
-        #     self.page.wait_for_url("**/order-confirmation")
-        # except Error as e:
-        #     print("Page crashed:", e)
-
+        self.place_order.click()
 
     def verify_product_final_price(self):
         # self.add_to_cart_button.click()
