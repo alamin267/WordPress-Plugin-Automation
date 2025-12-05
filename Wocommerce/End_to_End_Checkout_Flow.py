@@ -67,9 +67,9 @@ class EndToEndCheckoutFlow:
         time.sleep(3)
         print("Enter Shipping Adress Successfully")
         self.page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-        time.sleep(2)
+        time.sleep(3)
         self.select_pathao.click()
-        time.sleep(1)
+        time.sleep(3)
         self.place_order.click()
 
     def verify_product_final_price(self):
@@ -86,8 +86,7 @@ class EndToEndCheckoutFlow:
         quantity_item = float(quantity_item)
         print("Quantity:", quantity_item)
 
-        #self.select_pathao.click()
-        time.sleep(5)
+        self.page.wait_for_load_state("networkidle")
         shipping_charge_amount = self.shipping_charge.inner_text()
         shipping_charge_amount = shipping_charge_amount.split('৳')[0].replace(',', '').strip()
         shipping_charge_amount = float(shipping_charge_amount)
