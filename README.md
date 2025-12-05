@@ -136,8 +136,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: test-reports
-          path: report.xml
-```
+          path: report.xml  ```
 
 ### Configure Secrets in GitHub:
 
