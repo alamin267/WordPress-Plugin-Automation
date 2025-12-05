@@ -4,3 +4,4 @@ pytest-playwright==0.4.4
 python-dotenv
 pytest-html==3.2.0
 pytest-xdist==3.3.1
+pyperclip==1.11.0

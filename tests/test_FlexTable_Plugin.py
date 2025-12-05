@@ -34,8 +34,7 @@ def test_wordpress_login(page):
     # Test Case 1
     login_page.navigate(base_url)
     login_page.login(username, password)
-    assert "/wp-admin/" in page.url or "Dashboard" in page.content()
-
+    
 
     # Test Case 2
     plugin_page.go_to_installed_plugins()

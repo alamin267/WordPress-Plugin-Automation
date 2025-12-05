@@ -1,4 +1,5 @@
 import time
+import pyperclip
 from playwright.sync_api import Page
 
 class CreateNewPage:
@@ -19,8 +20,9 @@ class CreateNewPage:
         self.enter_shortcode_field = page.get_by_placeholder("Write shortcode here…")
         self.publish_button = page.locator("//button[normalize-space()='Publish']")
         self.second_publish_button = page.locator("//button[@class='components-button editor-post-publish-button editor-post-publish-button__button is-primary is-compact']")
-        self.view_page_button = page.locator("//a[@class='components-button is-next-40px-default-size is-primary']")
+        self.copy_code_button = page.locator("//button[normalize-space()='Copy']")
         self.home_button = page.locator("//a[@role='menuitem'][normalize-space()='MyLocalWordPress']")
+        
 
         # verify table
         self.can_not_load_text = page.locator("//b[contains(text(),'Table maybe deleted or can’t be loaded.')]")
@@ -29,9 +31,10 @@ class CreateNewPage:
         self.page.reload()
         time.sleep(3)
         short_code = self.short_code_button.all_text_contents()[0]
-        print("Code is", short_code)
+        #print("Code is", short_code)
         self.page_from_menu.click()
         self.add_new_page.click()
+        time.sleep(2)
         self.choosea_pattern.click()
         self.page_title.fill("Test Page")
         self.add_block_button.click()
@@ -44,14 +47,17 @@ class CreateNewPage:
         self.publish_button.click()
         time.sleep(3)
         self.second_publish_button.click()
-        #self.view_page_button.click()
+        self.copy_code_button.click()
+        self.new_page_url = pyperclip.paste()
+        time.sleep(3)
+        self.page.goto(self.new_page_url)
         time.sleep(3)
         self.page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
         time.sleep(2)
     
     def verify_table_value(self):
         if self.can_not_load_text.is_visible():
-            print("Table Can not loaded")
+            print("Table Can not be loaded during Automation time")
         else:
             print("Table loaded")
         #self.home_button.click()
